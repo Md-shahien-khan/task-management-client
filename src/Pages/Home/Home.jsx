@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion'; // Import Framer Motion
 import Navbar from '../Navbar/Navbar';
+import Banner from '../Banner/Banner';
+import TaskForm from '../TaskForm/TaskForm';
 
 const Home = () => {
     return (
@@ -12,6 +14,8 @@ const Home = () => {
             >
                 <Navbar />
             </motion.div>
+            <Banner></Banner>
+            <TaskForm></TaskForm>
         </div>
     );
 };
