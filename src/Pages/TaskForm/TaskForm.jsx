@@ -13,7 +13,7 @@ const TaskForm = () => {
   };
 
   return (
-    <div className="p-5 flex items-center justify-center">
+    <div className="p-3 flex items-center justify-center">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-center mb-6 text-gray-700">
           Create Task

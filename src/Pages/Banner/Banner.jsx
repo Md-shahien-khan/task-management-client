@@ -4,7 +4,7 @@ import banner from '../../assets/images/banner.png';
 const Banner = () => {
     return (
         <div
-            className="w-full h-[300px] md:h-[600px] bg-cover bg-center"
+            className="w-full h-[300px] md:h-[500px] bg-cover bg-center"
             style={{ backgroundImage: `url(${banner})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}
         >
             <div className="flex flex-col justify-center items-center h-full text-white text-center">

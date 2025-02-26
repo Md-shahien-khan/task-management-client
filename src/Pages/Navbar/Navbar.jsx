@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,20 +12,20 @@ const Navbar = () => {
             <img className='w-10' src="/src/assets/images/logo.png" alt="" />
           </div>
           <div className="hidden md:flex space-x-4 items-center">
-            <a href="/" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
               Home
-            </a>
-            <a href="/about" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
+            </Link>
+            <Link to="/about" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
               About
-            </a>
-            <a href="/register" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
+            </Link>
+            <Link to="/register" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
               Register
-            </a>
-            <a href="/login" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
+            </Link>
+            <Link to="/login" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
               Login
-            </a>
+            </Link>
             <div>
-                <img className='w-10 rounded-full' src="/src/assets/images/logo.png" alt="" />
+              <img className='w-10 rounded-full' src="/src/assets/images/logo.png" alt="" />
             </div>
           </div>
           <div className="flex items-center md:hidden">
@@ -78,18 +79,18 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
+            <Link to="/" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
               Home
-            </a>
-            <a href="/about" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
+            </Link>
+            <Link to="/about" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
               About
-            </a>
-            <a href="/register" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
+            </Link>
+            <Link to="/register" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
               Register
-            </a>
-            <a href="/login" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
+            </Link>
+            <Link to="/login" className="block text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">
               Login
-            </a>
+            </Link>
           </div>
         </div>
       )}
