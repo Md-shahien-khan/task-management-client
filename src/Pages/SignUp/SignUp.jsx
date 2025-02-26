@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGoogle } from 'react-icons/fa'; // Google icon
 import { AuthContext } from '../../Providers/AuthProvider'; // Assuming you have this context
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-  const {createUser} = useContext(AuthContext); 
+  const {createUser, updateUserProfile} = useContext(AuthContext); 
 //   const { signUpWithGoogle } = useContext(AuthContext); // Context function for Google Sign-Up
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+
 
   // Handle form submission
   const onSubmit = async (data) => {
@@ -21,7 +23,13 @@ const SignUp = () => {
     createUser(email, password)
       .then(result => {
         const user = result.user;
-        console.log('Logged in user:', user);  // Logs the user object returned by Firebase or your authentication provider
+        console.log('Logged in user:', user);
+        navigate('/');
+        updateUserProfile(data.name, data.photoUrl)
+            .then(() => {
+                console.log('user profile updated');
+            })
+            .catch(error => console.log(error));
       })
       .catch(error => {
         console.error('Error during sign-in:', error.message);  // Handles any error from the signIn function

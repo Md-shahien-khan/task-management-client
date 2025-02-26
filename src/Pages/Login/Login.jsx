@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { FaGoogle } from 'react-icons/fa';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const {signIn} = useContext(AuthContext); 
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
+  const navigate = useNavigate();
 
   // Handle form submission
   const onSubmit = (data) => {
@@ -26,6 +27,7 @@ const Login = () => {
       .then(result => {
         const user = result.user;
         console.log('Logged in user:', user);  // Logs the user object returned by Firebase or your authentication provider
+        navigate('/');
       })
       .catch(error => {
         console.error('Error during sign-in:', error.message);  // Handles any error from the signIn function
