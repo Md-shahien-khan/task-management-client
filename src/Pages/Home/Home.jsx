@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'; // Import Framer Motion
 import Navbar from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import TaskForm from '../TaskForm/TaskForm';
-import TaskDetailsCard from '../TaskDetailsCard/TaskDetailsCard';
+import AllTasks from '../AllTasks/AllTasks';
+// import TaskDetailsCard from '../TaskDetailsCard/TaskDetailsCard';
 
 const Home = () => {
     return (
@@ -35,13 +36,13 @@ const Home = () => {
                 <TaskForm />
             </motion.div>
             {/* TaskForm with animation */}
-            {/* <motion.div
+            <motion.div
                 initial={{ y: 50, opacity: 0 }} // Start slightly below and invisible
                 animate={{ y: 0, opacity: 1 }} // Animate to natural position and fully visible
                 transition={{ delay: 1, duration: 0.5, ease: 'easeOut' }} // Delay to appear after Banner
             >
-                
-            </motion.div> */}
+                <AllTasks></AllTasks>
+            </motion.div>
         </div>
     );
 };
