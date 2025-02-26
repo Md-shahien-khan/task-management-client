@@ -1,18 +1,44 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import {app} from "../Firebase/firebase.config"
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const googleProvider = new GoogleAuthProvider();
+
 
     // Create User
-    const createUser = (email, password) =>{
+    const createUser = async(email, password) =>{
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        const userCred =  await createUserWithEmailAndPassword(auth, email, password);
+        // console.log(userCred)
+        setUser(userCred)
+        const userInfoForDB = {
+            userName : userCred?.user.displayName,
+            email : userCred?.user?.email
+        }
+
+        // console.log(userInfoForDB)
+        axios.post(`http://localhost:2000/users`, userInfoForDB)
     }
+
+    // google sign in Provider
+    const googleSignIn = async() => {
+        setLoading(true);
+        const userCred =  await signInWithPopup(auth, googleProvider)
+        setUser(userCred)
+        const userInfoForDB = {
+            userName : userCred?.user.userName,
+            email : userCred?.user?.email
+        }
+        // console.log(userInfoForDB)
+        axios.post(`http://localhost:2000/users`, userInfoForDB)
+      };
+      
 
     // sign in
     const signIn = (email, password) =>{
@@ -50,6 +76,7 @@ const AuthProvider = ({children}) => {
         createUser,
         signIn,
         logOut,
+        googleSignIn,
         updateUserProfile
     }
     return (

@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const TaskForm = () => {
+  const {user} = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // Log the task data in the console (for testing)
+    // console.log(data);
+  
+    // Add the user's email to the data object
+    const taskData = {
+      ...data,
+      email : user?.email, // Add user email to the data
+    };
+  
+    try {
+      // Send the task data to the backend API using axios
+      const response = await axios.post("http://localhost:2000/tasks", taskData);
+  
+      // Handle the successful response
+      if (response.status === 200) {
+        alert("Task created successfully!");
+      }
+    } catch (error) {
+      console.error("Error submitting task:", error);
+      alert("There was an error creating the task.");
+    }
   };
 
   return (

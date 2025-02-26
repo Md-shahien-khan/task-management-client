@@ -3,48 +3,32 @@ import { useForm } from 'react-hook-form';
 import { FaGoogle } from 'react-icons/fa'; // Google icon
 import { AuthContext } from '../../Providers/AuthProvider'; // Assuming you have this context
 import { Link, useNavigate } from 'react-router-dom';
+import useAxios from '../Hooks/useAxios'; // Importing useAxios hook
 
 const SignUp = () => {
-  const {createUser, updateUserProfile} = useContext(AuthContext); 
-//   const { signUpWithGoogle } = useContext(AuthContext); // Context function for Google Sign-Up
+  const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-
   // Handle form submission
   const onSubmit = async (data) => {
-    // Here you can handle user registration logic (e.g. call an API)
-    console.log('User registration data:', data);
-
     // Extract email and password from the form data
-    const { email, password } = data;
-  
-    // Call signIn function from AuthContext
-    createUser(email, password)
-      .then(result => {
-        const user = result.user;
-        console.log('Logged in user:', user);
-        navigate('/');
-        updateUserProfile(data.name, data.photoUrl)
-            .then(() => {
-                console.log('user profile updated');
-            })
-            .catch(error => console.log(error));
-      })
-      .catch(error => {
-        console.error('Error during sign-in:', error.message);  // Handles any error from the signIn function
-      });
+    const { email, password, name, photoURL } = data;
+    const result = await createUser(email, password);
+    navigate('/')
   };
 
-  // Handle Google Sign-Up
-//   const handleGoogleSignUp = async () => {
-//     try {
-//       await signUpWithGoogle();
-//       console.log('Successfully signed up with Google');
-//     } catch (error) {
-//       console.error('Google sign-up error:', error);
-//     }
-//   };
+  // Google Sign-Up handler
+  const handleGoogleSignUp = () => {
+    googleSignIn()
+      .then(result => {
+        console.log('Google sign-up result:', result.user);
+        navigate('/');
+      })
+      .catch(error => {
+        console.error('Error during Google Sign In:', error.message);
+      });
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen  px-4 sm:px-6 lg:px-8">
@@ -117,9 +101,9 @@ const SignUp = () => {
               <label htmlFor="photoUrl" className="sr-only">Photo URL</label>
               <input
                 id="photoUrl"
-                name="photoUrl"
+                name="photoURL"
                 type="text"
-                {...register('photoUrl', {
+                {...register('photoURL', {
                   required: 'Photo URL is required',
                   pattern: {
                     value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp))$/i,
@@ -147,7 +131,7 @@ const SignUp = () => {
         {/* Google Sign-Up Button */}
         <div className="mt-6">
           <button
-            
+            onClick={handleGoogleSignUp}
             className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-gray-800 bg-white shadow-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
           >
             <FaGoogle className="mr-2 text-xl text-red-600" />

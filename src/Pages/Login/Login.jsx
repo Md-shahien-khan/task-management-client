@@ -6,7 +6,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const {signIn} = useContext(AuthContext); 
+  const {signIn, googleSignIn} = useContext(AuthContext); 
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Login = () => {
       alert('Please complete the CAPTCHA');
       return;
     }
-  
+
     // Extract email and password from the form data
     const { email, password } = data;
   
@@ -33,7 +33,12 @@ const Login = () => {
         console.error('Error during sign-in:', error.message);  // Handles any error from the signIn function
       });
   };
-  
+
+  // google signin
+  const handleGoogleSignIn = async() =>{
+    await googleSignIn();
+    navigate('/');
+  }
 
   // Initialize CAPTCHA on component mount
   useEffect(() => {
@@ -124,7 +129,7 @@ const Login = () => {
 
         {/* Sign In with Google */}
         <div className="mt-6">
-          <button
+          <button onClick={handleGoogleSignIn}
             className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-gray-800 bg-white shadow-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
           >
             <FaGoogle className="mr-2 text-xl text-red-600" />
