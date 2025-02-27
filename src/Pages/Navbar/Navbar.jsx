@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import logo from '../../assets/images/logo.png'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false); // For dropdown menu
   const { user, logOut } = useContext(AuthContext);
+  
 
   // Handle logout
   const handleLogout = () => {
@@ -22,7 +24,7 @@ const Navbar = () => {
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
-            <img className="w-10" src="/src/assets/images/logo.png" alt="Logo" />
+            <img className="w-10" src={logo} alt="Logo" />
           </div>
           <div className="hidden md:flex space-x-4 items-center">
             {/* Home Link */}
