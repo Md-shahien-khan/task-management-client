@@ -23,7 +23,7 @@ const AuthProvider = ({children}) => {
         }
 
         // console.log(userInfoForDB)
-        axios.post(`http://localhost:2000/users`, userInfoForDB)
+        axios.post(`https://task-maven-server.vercel.app/users`, userInfoForDB)
     }
 
     // google sign in Provider
@@ -36,7 +36,7 @@ const AuthProvider = ({children}) => {
             email : userCred?.user?.email
         }
         // console.log(userInfoForDB)
-        axios.post(`http://localhost:2000/users`, userInfoForDB)
+        axios.post(`https://task-maven-server.vercel.app/users`, userInfoForDB)
       };
       
 

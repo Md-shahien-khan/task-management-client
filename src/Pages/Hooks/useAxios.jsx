@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL : 'http://localhost:2000/'
+    baseURL : 'https://task-maven-server.vercel.app/'
 })
 const useAxios = () => {
     return axiosPublic;

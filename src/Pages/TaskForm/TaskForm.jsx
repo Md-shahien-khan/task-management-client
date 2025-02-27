@@ -23,7 +23,7 @@ const TaskForm = () => {
   
     try {
       // Send the task data to the backend API using axios
-      const response = await axios.post("http://localhost:2000/tasks", taskData);
+      const response = await axios.post("https://task-maven-server.vercel.app/tasks", taskData);
   
       // Handle the successful response
       if (response.status === 200) {

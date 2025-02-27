@@ -33,7 +33,7 @@ const EachTaskCard = ({ task }) => {
         return; 
       }
      
-      const response = await axios.patch(`http://localhost:2000/tasks/${updatedTask._id}`, updatedTask);
+      const response = await axios.patch(`https://task-maven-server.vercel.app/tasks/${updatedTask._id}`, updatedTask);
   
       if (response.status === 200) {
         console.log('Task updated successfully:', response.data);
@@ -52,7 +52,7 @@ const EachTaskCard = ({ task }) => {
   const handleDelete = async () => {
     try {
 
-      const response = await axios.delete(`http://localhost:2000/tasks/${task._id}`);
+      const response = await axios.delete(`https://task-maven-server.vercel.app/tasks/${task._id}`);
       
       if (response.status === 200) {
         console.log('Task deleted successfully:', response.data);

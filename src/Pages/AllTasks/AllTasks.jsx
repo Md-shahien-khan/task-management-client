@@ -9,7 +9,7 @@ const AllTasks = () => {
   
   useEffect(() => {
     // Fetch tasks from the API
-    axios.get('http://localhost:2000/tasks')
+    axios.get('https://task-maven-server.vercel.app/tasks')
       .then(response => {
         setTasks(response.data);
       })
